@@ -1,0 +1,17 @@
+{
+  "name": "evand-app-iconfont",
+  "version": "1.0.0",
+  "description": "The icon font used in Evand mobile app",
+  "main": "index.js",
+  "repository": "https://github.com/evandhq/evand-app-iconfont",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "grunt"
+  },
+  "author": "Mehdi Namvar",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-webfont": "^1.1.1"
+  }
+}
