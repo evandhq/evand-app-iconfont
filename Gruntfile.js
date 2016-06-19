@@ -1,3 +1,28 @@
+var chars = 'ضصثقفغعهخحجچشسیبلاتنمکگظطزرذدپو؟كيؤئژأآة«»ءٓٔ۱۲۳۴۵۶۷۸۹۰'.split('');
+var fs = require('fs');
+
+function charCode(c) {
+    return c.charCodeAt(0);
+}
+
+var fileChars = fs
+    .readdirSync(__dirname + '/src')
+    .filter(fileName => /\.svg/.test(fileName))
+    .map(fileName => fileName.replace('.svg', ''))
+    .map(name => [name, chars.pop()]);
+
+var mapNameToChars = fileChars.reduce((prev, curr) => {
+    prev[curr[0]] = curr[1];
+    return prev;
+}, {});
+
+var mapNameToCodePoints = fileChars.reduce((prev, curr) => {
+    prev[curr[0]] = charCode(curr[1]);
+    return prev;
+}, {});
+
+fs.writeFileSync(__dirname + '/build/EvandAppIcons.json', JSON.stringify(mapNameToChars));
+
 module.exports = function (grunt) {
     grunt.initConfig({
         webfont: {
@@ -5,24 +30,11 @@ module.exports = function (grunt) {
                 src: 'src/*.svg',
                 dest: 'build',
                 options: {
-                    codepoints: {
-                        // back: 0x62,             // b
-                        // check: 0x63,            // c
-                        // home: 0x68,             // h
-                        // list: 0x6c,             // l
-                        // logout: 0x7a,           // z
-                        // money: 0x6d,            // m
-                        // nav: 0x6e,              // n
-                        // qr: 0x71,               // q
-                        // times: 0x74,            // t
-                        // wheel: 0x77,            // w
-                        // circle: 0x64,           // d
-                        // exclamation: 0x78,      // x
-                    },
+                    codepoints: mapNameToCodePoints,
                     hashes: false,
                     types: ['eot', 'woff2', 'woff', 'ttf'],
-                    fontFilename: 'Evandappicons',
-                    font: 'Evandappicons',
+                    fontFilename: 'EvandAppIcons',
+                    font: 'EvandAppIcons',
                     templateOptions: {
                         baseClass: 'evand',
                         classPrefix: 'evand-'
