@@ -1,6 +1,6 @@
 {
   "name": "evand-app-iconfont",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "The icon font used in Evand mobile app",
   "main": "index.js",
   "repository": "https://github.com/evandhq/evand-app-iconfont",
